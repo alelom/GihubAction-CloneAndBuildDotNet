@@ -33,6 +33,9 @@ jobs:
       - name: Clone BHoM repo
         run: git clone https://github.com/BHoM/BHoM.git
         
+      - name: Remove all lines containing "xcopy" from csproj files
+        run: grep --include \*.csproj -Rl "xcopy" | xargs sed -i "/xcopy/d"
+        
       - name: Compile BHoM repo
         uses: Elskom/build-dotnet@v1.1.1
         with:
